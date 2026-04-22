@@ -1,0 +1,85 @@
+version: "3.8"
+
+# 1. Define the custom isolated network
+networks:
+  crud_network:
+    driver: bridge
+
+# 2. Define the persistent volumes
+volumes:
+  inventory-db:
+  billing-db:
+  api-gateway-app:
+
+services:
+  # --- DATABASES ---
+  inventory-db:
+    build: ./srcs/inventory-db
+    image: inventory-db # Image name must match service name
+    container_name: inventory-db
+    restart: always # Must automatically restart
+    env_file: .env
+    volumes:
+      - inventory-db:/var/lib/postgresql/13/main
+    networks:
+      - crud_network
+
+  billing-db:
+    build: ./srcs/billing-db
+    image: billing-db
+    container_name: billing-db
+    restart: always
+    env_file: .env
+    volumes:
+      - billing-db:/var/lib/postgresql/13/main
+    networks:
+      - crud_network
+
+  rabbit-queue:
+    build: ./srcs/rabbit-queue
+    image: rabbit-queue
+    container_name: rabbit-queue
+    restart: always
+    env_file: .env
+    networks:
+      - crud_network
+
+  # --- APPLICATIONS ---
+  inventory-app:
+    build: ./srcs/inventory-app
+    image: inventory-app
+    container_name: inventory-app
+    restart: always
+    env_file: .env
+    depends_on:
+      - inventory-db
+    networks:
+      - crud_network
+
+  billing-app:
+    build: ./srcs/billing-app
+    image: billing-app
+    container_name: billing-app
+    restart: always
+    env_file: .env
+    depends_on:
+      - billing-db
+      - rabbit-queue
+    networks:
+      - crud_network
+
+  api-gateway-app:
+    build: ./srcs/api-gateway-app
+    image: api-gateway-app
+    container_name: api-gateway-app
+    restart: always
+    env_file: .env
+    depends_on:
+      - inventory-app
+      - rabbit-queue
+    ports:
+      - "3000:3000" # ONLY the Gateway is exposed to the outside
+    volumes:
+      - api-gateway-app:/app/logs # Maps the volume for Gateway logs
+    networks:
+      - crud_network
