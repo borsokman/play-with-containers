@@ -35,10 +35,10 @@ services:
     networks:
       - crud_network
 
-  rabbit-queue:
-    build: ./srcs/rabbit-queue
-    image: rabbit-queue
-    container_name: rabbit-queue
+  rabbitmq-server:
+    build: ./srcs/rabbitmq-server
+    image: rabbitmq-server
+    container_name: rabbitmq-server
     restart: always
     env_file: .env
     networks:
@@ -64,7 +64,7 @@ services:
     env_file: .env
     depends_on:
       - billing-db
-      - rabbit-queue
+      - rabbitmq-server
     networks:
       - crud_network
 
@@ -76,7 +76,7 @@ services:
     env_file: .env
     depends_on:
       - inventory-app
-      - rabbit-queue
+      - rabbitmq-server
     ports:
       - "3000:3000" # ONLY the Gateway is exposed to the outside
     volumes:
