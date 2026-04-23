@@ -13,19 +13,23 @@
       "item": [
         {
           "name": "Inventory API Get Movies",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
             "method": "GET",
             "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\":\"Inception Updated\",\"description\":\"Sci-fi updated\"}"
+            },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies",
+              "raw": "http://localhost:3000/api/movies",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies"
@@ -60,7 +64,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\"title\":\"Inception\",\"description\":\"Sci-fi\"}",
+              "raw": "{\"title\":\"Rush Hour\",\"description\":\"Comedy\"}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -68,15 +72,12 @@
               }
             },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies",
+              "raw": "http://localhost:3000/api/movies",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies"
@@ -91,19 +92,21 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies/1",
+              "raw": "http://localhost:3000/api/movies?title=Rush_Hour",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
-                "movies",
-                "1"
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "Rush_Hour"
+                }
               ]
             }
           },
@@ -124,15 +127,12 @@
               }
             },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies/1?Content-Type=application/json",
+              "raw": "http://localhost:3000/api/movies/1?Content-Type=application/json",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies",
@@ -141,8 +141,7 @@
               "query": [
                 {
                   "key": "Content-Type",
-                  "value": "application/json",
-                  "type": "text"
+                  "value": "application/json"
                 }
               ]
             }
@@ -155,7 +154,7 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies/3",
+              "raw": "http://192.168.56.10:3000/api/movies/1",
               "protocol": "http",
               "host": [
                 "192",
@@ -163,11 +162,11 @@
                 "56",
                 "10"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies",
-                "3"
+                "1"
               ]
             }
           },
@@ -205,7 +204,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\"user_id\": \"3\", \"number_of_items\": 5, \"total_amount\": 180.0}",
+              "raw": "{\"user_id\": \"4\", \"number_of_items\": 7, \"total_amount\": 370.78}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -213,15 +212,12 @@
               }
             },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/billing",
+              "raw": "http://localhost:3000/api/billing",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "billing"
@@ -260,15 +256,12 @@
               }
             },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/billing",
+              "raw": "http://localhost:3000/api/billing",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "billing"
@@ -309,15 +302,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies",
+              "raw": "http://localhost:3000/api/movies",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies"
@@ -357,15 +347,12 @@
               }
             },
             "url": {
-              "raw": "http://192.168.56.10:5000/api/billing",
+              "raw": "http://localhost:3000/api/billing",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "billing"
@@ -396,15 +383,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://192.168.56.10:5000/api/movies",
+              "raw": "http://localhost:3000/api/movies",
               "protocol": "http",
               "host": [
-                "192",
-                "168",
-                "56",
-                "10"
+                "localhost"
               ],
-              "port": "5000",
+              "port": "3000",
               "path": [
                 "api",
                 "movies"

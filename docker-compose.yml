@@ -19,6 +19,10 @@ services:
     container_name: inventory-db
     restart: always # Must automatically restart
     env_file: .env
+    environment:
+      - DB_NAME=${INVENTORY_DB_NAME}
+      - DB_USER=${INVENTORY_DB_USER}
+      - DB_PASSWORD=${INVENTORY_DB_PASSWORD}
     volumes:
       - inventory-db:/var/lib/postgresql/13/main
     networks:
@@ -30,6 +34,10 @@ services:
     container_name: billing-db
     restart: always
     env_file: .env
+    environment:
+      - DB_NAME=${BILLING_DB_NAME}
+      - DB_USER=${BILLING_DB_USER}
+      - DB_PASSWORD=${BILLING_DB_PASSWORD}
     volumes:
       - billing-db:/var/lib/postgresql/13/main
     networks:
@@ -51,6 +59,12 @@ services:
     container_name: inventory-app
     restart: always
     env_file: .env
+    environment:
+      - DB_NAME=${INVENTORY_DB_NAME}
+      - DB_USER=${INVENTORY_DB_USER}
+      - DB_PASSWORD=${INVENTORY_DB_PASSWORD}
+      - DB_HOST=${INVENTORY_DB_HOST}
+      - DB_PORT=${INVENTORY_DB_PORT}
     depends_on:
       - inventory-db
     networks:
@@ -62,6 +76,12 @@ services:
     container_name: billing-app
     restart: always
     env_file: .env
+    environment:
+      - DB_NAME=${BILLING_DB_NAME}
+      - DB_USER=${BILLING_DB_USER}
+      - DB_PASSWORD=${BILLING_DB_PASSWORD}
+      - DB_HOST=${BILLING_DB_HOST}
+      - DB_PORT=${BILLING_DB_PORT}
     depends_on:
       - billing-db
       - rabbitmq-server
