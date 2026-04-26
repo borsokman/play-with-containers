@@ -19,6 +19,38 @@ _All containers are built from scratch using `debian:bullseye` as the base image
 - Docker Engine
 - Docker Compose (V2)
 
+Configuration
+Before building the infrastructure, you must create a .env file in the root directory. This file is ignored by Git to prevent credential leaks.
+
+Create .env with the following variables:
+
+# Inventory Database
+
+INVENTORY_DB_NAME=movies_db
+INVENTORY_DB_USER=movies_user
+INVENTORY_DB_PASSWORD=your_secure_password
+INVENTORY_DB_HOST=inventory-db
+INVENTORY_DB_PORT=5432
+
+# Billing Database
+
+BILLING_DB_NAME=billing_db
+BILLING_DB_USER=orders_user
+BILLING_DB_PASSWORD=your_secure_password
+BILLING_DB_HOST=billing-db
+BILLING_DB_PORT=5432
+
+# RabbitMQ Server
+
+RABBITMQ_HOST=rabbitmq-server
+RABBITMQ_PORT=5672
+RABBITMQ_USER=billing_user
+RABBITMQ_PASSWORD=your_secure_password
+
+# API Gateway Routing
+
+INVENTORY_URL=http://inventory-app:8080
+
 ## Infrastructure Setup & Management
 
 The entire infrastructure is managed exclusively via Docker Compose.
@@ -45,12 +77,11 @@ In the imported collection, go to the Variables tab.
 Ensure base_url is set to http://localhost:3000 (or your VM's IP if testing remotely).
 Run the requests to verify Inventory CRUD operations and the asynchronous Billing Queue.
 
-### Project Tree
+## Project Tree
 
 ```
 play-with-containers
 ├─ README.md
-├─ config.yaml
 ├─ docker-compose.yml
 ├─ play-with-containers API tests.json
 ├─ play-with-containers-py.png
