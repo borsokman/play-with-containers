@@ -76,6 +76,7 @@ Select the Gateway_API_Tests.postman_collection.json file.
 In the imported collection, go to the Variables tab.
 Ensure base_url is set to http://localhost:3000 (or your VM's IP if testing remotely).
 Run the requests to verify Inventory CRUD operations and the asynchronous Billing Queue.
+Checking billing-db: docker exec -it billing-db psql -d billing_db -c "SELECT \* FROM orders;"
 
 ## Project Tree
 
